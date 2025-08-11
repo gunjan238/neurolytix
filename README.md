@@ -71,11 +71,7 @@ Strategic data architecture, governance, and optimization services to maximize t
 
 ---
 
-## 📞 Contact Us
 
-📧 **Email:** contact@neurolytix.com  
-🌐 **Website:** [www.neurolytix.com](https://www.neurolytix.com)  
-📍 **Location:** Global Operations
 
 ---
 
