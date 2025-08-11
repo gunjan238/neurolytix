@@ -133,7 +133,7 @@ const Team = () => {
               Are you passionate about AI, machine learning, and driving business transformation? 
               We're always looking for talented individuals to join our mission.
             </p>
-            <Button variant="neural" size="lg" className="neural-pulse">
+            <Button variant="neural" size="lg">
               Explore Opportunities
             </Button>
           </div>
