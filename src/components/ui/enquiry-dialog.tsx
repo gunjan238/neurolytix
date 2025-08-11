@@ -115,7 +115,7 @@ const EnquiryDialog = ({ open, onOpenChange }: EnquiryDialogProps) => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                placeholder="+91 9359434872"
+                placeholder="Enter phone number"
               />
             </div>
           </div>
