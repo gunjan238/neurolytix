@@ -210,41 +210,40 @@
 // export default Contact;
 
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import Footer from "@/components/ui/footer";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
 
-const Contact = () => {
+export default function ContactForm() {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     company: "",
     service: "",
-    message: "",
+    message: ""
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const handleSelectChange = (value) => {
-    setFormData({ ...formData, service: value });
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  const handleSubmit = async () => {
     try {
       await fetch("https://script.google.com/macros/s/AKfycbwRQj909PKaQmmnWgQlCQN0bvxmSVCegd35K1tqCL7xwhodkgkmV9UJ3xPJ4Fel-gyW/exec", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
       });
+
       alert("Message sent!");
       setFormData({
         firstName: "",
@@ -252,211 +251,104 @@ const Contact = () => {
         email: "",
         company: "",
         service: "",
-        message: "",
+        message: ""
       });
     } catch (err) {
       console.error(err);
-      alert("Error sending message");
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="pt-16 min-h-screen">
-      {/* Hero Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">Get In Touch</h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              Ready to transform your business with AI and data intelligence? Let's start the conversation.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Information */}
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-3xl font-bold mb-6">Let's Connect</h2>
-                <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                  Whether you're looking to implement AI solutions, optimize your data strategy, or explore
-                  custom software development, our team is here to help you achieve your goals.
-                </p>
-              </div>
-
-              <div className="grid gap-6">
-                <Card className="border-border bg-card">
-                  <CardContent className="flex items-center gap-4 p-6">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Mail className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold">Email</h3>
-                      <p className="text-muted-foreground">neurolytix028@gmail.com</p>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-border bg-card">
-                  <CardContent className="flex items-center gap-4 p-6">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Phone className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold">Phone</h3>
-                      <p className="text-muted-foreground">+91 9359434872</p>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-border bg-card">
-                  <CardContent className="flex items-center gap-4 p-6">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Clock className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold">Business Hours</h3>
-                      <p className="text-muted-foreground">Mon - Fri: 9:00 AM - 6:00 PM IST</p>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-border bg-card">
-                  <CardContent className="flex items-center gap-4 p-6">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <MapPin className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold">Location</h3>
-                      <p className="text-muted-foreground">Serving clients globally</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+    <Card className="border-border bg-card">
+      <CardHeader>
+        <CardTitle className="text-2xl">Start Your Project</CardTitle>
+        <CardDescription>
+          Tell us about your needs and we'll get back to you within 24 hours.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="firstName">First Name</Label>
+              <Input id="firstName" value={formData.firstName} onChange={handleChange} required />
             </div>
-
-            {/* Contact Form */}
-            <Card className="border-border bg-card">
-              <CardHeader>
-                <CardTitle className="text-2xl">Start Your Project</CardTitle>
-                <CardDescription>
-                  Tell us about your needs and we'll get back to you within 24 hours.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name</Label>
-                    <Input id="firstName" value={formData.firstName} onChange={handleChange} placeholder="John" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name</Label>
-                    <Input id="lastName" value={formData.lastName} onChange={handleChange} placeholder="Doe" />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" value={formData.email} onChange={handleChange} placeholder="john@company.com" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="company">Company</Label>
-                  <Input id="company" value={formData.company} onChange={handleChange} placeholder="Your Company" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="service">Service Interest</Label>
-                  <Select onValueChange={handleSelectChange} value={formData.service}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a service" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="AI & Machine Learning">AI & Machine Learning</SelectItem>
-                      <SelectItem value="Business Intelligence">Business Intelligence</SelectItem>
-                      <SelectItem value="Software Development">Software Development</SelectItem>
-                      <SelectItem value="Data Consultancy">Data Consultancy</SelectItem>
-                      <SelectItem value="General Consultation">General Consultation</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="message">Project Description</Label>
-                  <Textarea
-                    id="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Tell us about your project goals, timeline, and any specific requirements..."
-                    rows={4}
-                  />
-                </div>
-
-                <Button className="w-full" size="lg" onClick={handleSubmit}>
-                  Send Message
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 bg-card/30">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
-            <div className="space-y-6">
-              <Card className="border-border bg-card">
-                <CardHeader>
-                  <CardTitle className="text-lg">How long does a typical AI implementation take?</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base">
-                    Project timelines vary based on complexity and scope. Simple BI dashboards can be delivered in 2-4 weeks,
-                    while comprehensive AI solutions typically take 3-6 months. We provide detailed timelines during our
-                    initial consultation.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="border-border bg-card">
-                <CardHeader>
-                  <CardTitle className="text-lg">Do you work with startups and small businesses?</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base">
-                    Absolutely! We serve organizations of all sizes, from startups to enterprise clients. Our scalable
-                    solutions are designed to grow with your business, and we offer flexible engagement models to fit
-                    different budgets and requirements.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-
-              <Card className="border-border bg-card">
-                <CardHeader>
-                  <CardTitle className="text-lg">What industries do you specialize in?</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base">
-                    We have experience across all major industries including manufacturing, healthcare, retail, finance,
-                    automotive, and more. Our AI and data solutions are adaptable to virtually any sector that deals
-                    with data and seeks operational optimization.
-                  </CardDescription>
-                </CardContent>
-              </Card>
+            <div className="space-y-2">
+              <Label htmlFor="lastName">Last Name</Label>
+              <Input id="lastName" value={formData.lastName} onChange={handleChange} required />
             </div>
           </div>
-        </div>
-      </section>
 
-      <Footer />
-    </div>
+          <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" type="email" value={formData.email} onChange={handleChange} required />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="company">Company</Label>
+            <Input id="company" value={formData.company} onChange={handleChange} />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="service">Service Interest</Label>
+            <Select onValueChange={(value) => setFormData({ ...formData, service: value })}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a service" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ai-ml">AI & Machine Learning</SelectItem>
+                <SelectItem value="business-intelligence">Business Intelligence</SelectItem>
+                <SelectItem value="software-development">Software Development</SelectItem>
+                <SelectItem value="data-consultancy">Data Consultancy</SelectItem>
+                <SelectItem value="consultation">General Consultation</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="message">Project Description</Label>
+            <Textarea
+              id="message"
+              rows={4}
+              value={formData.message}
+              onChange={handleChange}
+            />
+          </div>
+
+          <Button type="submit" className="w-full" size="lg" disabled={loading}>
+            {loading ? (
+              <div className="flex items-center justify-center gap-2">
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4l3.5-3.5L12 0v4a8 8 0 000 16v4l3.5-3.5L12 20v4a8 8 0 01-8-8z"
+                  ></path>
+                </svg>
+                Sending...
+              </div>
+            ) : (
+              "Send Message"
+            )}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
   );
-};
-
-export default Contact;
+}
