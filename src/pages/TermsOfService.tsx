@@ -8,7 +8,7 @@ const TermsOfService = () => {
         Effective Date: [Insert Date]
       </p>
       <p className="mb-4">
-        By accessing or using NeuroLytix’s website or services, you agree to these
+        By accessing or using NuroLytix’s website or services, you agree to these
         Terms of Service. If you do not agree, please do not use our site.
       </p>
       <h2 className="text-xl font-semibold mt-8 mb-4">User Responsibilities</h2>

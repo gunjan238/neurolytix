@@ -8,7 +8,7 @@ const PrivacyPolicy = () => {
         Effective Date: [Insert Date]
       </p>
       <p className="mb-4">
-        NeuroLytix (“we,” “our,” “us”) values your privacy. This Privacy Policy
+        NuroLytix (“we,” “our,” “us”) values your privacy. This Privacy Policy
         explains how we collect, use, disclose, and protect your personal
         information when you visit our website, use our services, or interact
         with us.
@@ -26,7 +26,7 @@ const PrivacyPolicy = () => {
       </p>
       <h2 className="text-xl font-semibold mt-8 mb-4">Contact Us</h2>
       <p>
-        Email: <a href="mailto:enquire@neurolytix.com" className="text-primary">enquire@neurolytix.com</a>
+        Email: <a href="mailto:enquire@NuroLytix.com" className="text-primary">enquire@NuroLytix.com</a>
       </p>
     </div>
   );

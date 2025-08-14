@@ -38,10 +38,10 @@ const Navigation = () => {
           <Link to="/" className="flex items-center space-x-3 group" onClick={handleNavClick}>
             <img 
               src="/assets/neurolytix.png"
-              alt="NeuroLytix Logo"
+              alt="NuroLytix Logo"
               className="w-8 h-8 group-hover:scale-110 transition-transform neural-pulse"
             />
-            <span className="text-xl font-bold text-gradient">NeuroLytix</span>
+            <span className="text-xl font-bold text-gradient">NuroLytix</span>
           </Link>
 
           {/* Desktop Navigation */}

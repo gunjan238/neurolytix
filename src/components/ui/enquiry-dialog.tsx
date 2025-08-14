@@ -64,7 +64,7 @@ const EnquiryDialog = ({ open, onOpenChange }: EnquiryDialogProps) => {
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-gradient">Get Started with NeuroLytix</AlertDialogTitle>
+          <AlertDialogTitle className="text-gradient">Get Started with NuroLytix</AlertDialogTitle>
           <AlertDialogDescription>
             Tell us about your project and we'll get back to you within 24 hours.
           </AlertDialogDescription>

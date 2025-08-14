@@ -52,10 +52,10 @@ const Footer = () => {
             <div className="flex items-center space-x-3">
               <img 
                 src="/assets/neurolytix.png"
-                alt="NeuroLytix Logo"
+                alt="NuroLytix Logo"
                 className="w-10 h-10"
               />
-              <span className="text-2xl font-bold text-gradient">NeuroLytix</span>
+              <span className="text-2xl font-bold text-gradient">NuroLytix</span>
             </div>
             
             <p className="text-muted-foreground leading-relaxed">
@@ -177,7 +177,7 @@ const Footer = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © {currentYear} NeuroLytix. All rights reserved.
+              © {currentYear} NuroLytix. All rights reserved.
             </p>
             
             <div className="flex space-x-6 text-sm">

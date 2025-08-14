@@ -10,7 +10,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gradient">
-              About NeuroLytix
+              About NuroLytix
             </h1>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
               Pioneering the future of intelligent business solutions through advanced neural networks and data analytics.
@@ -19,14 +19,14 @@ const About = () => {
         </div>
       </section>
 
-      {/* Why NeuroLytix Section */}
+      {/* Why NuroLytix Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">Why NeuroLytix?</h2>
+            <h2 className="text-3xl font-bold mb-8 text-center">Why NuroLytix?</h2>
             <div className="prose prose-lg max-w-none text-muted-foreground">
               <p className="mb-6">
-                The name "NeuroLytix" perfectly embodies our core mission and expertise. "Neuro" represents our deep 
+                The name "NuroLytix" perfectly embodies our core mission and expertise. "Neuro" represents our deep 
                 focus on neural networks, artificial intelligence, and brain-inspired computing solutions. "Lytix" 
                 combines "Analytics" with a modern tech edge, highlighting our commitment to transforming raw data 
                 into actionable insights.

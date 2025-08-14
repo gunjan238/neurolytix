@@ -69,7 +69,7 @@ const Index = () => {
             </Badge>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              <span className="text-gradient">NeuroLytix</span>
+              <span className="text-gradient">NuroLytix</span>
               <br />
               <span className="text-foreground">Intelligent Solutions</span>
             </h1>
@@ -149,11 +149,11 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Why <span className="text-gradient">NeuroLytix</span>?
+                Why <span className="text-gradient">NuroLytix</span>?
               </h2>
               <div className="space-y-6 text-muted-foreground leading-relaxed">
                 <p>
-                  The name "NeuroLytix" embodies our core mission: combining neural network intelligence with 
+                  The name "NuroLytix" embodies our core mission: combining neural network intelligence with 
                   advanced analytics to create smarter business solutions. Just as neural networks mirror the 
                   interconnected nature of the human brain, our approach creates intelligent connections between 
                   disparate data sources.
@@ -235,7 +235,7 @@ const Index = () => {
           </p>
           <Button variant="neural" size="lg" asChild>
             <Link to="/contact">
-              Contact NeuroLytix
+              Contact NuroLytix
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </Button>
