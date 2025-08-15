@@ -13,6 +13,7 @@ const Contact = () => {
     firstName: "",
     lastName: "",
     email: "",
+    phone: "",
     company: "",
     service: "",
     message: "",
@@ -28,7 +29,7 @@ const Contact = () => {
 
   const handleSubmit = async () => {
     try {
-      await fetch("https://script.google.com/macros/s/AKfycbxR9lP0a33N8YKTlfp-C4OH71hrMQGomVwZZ0xV0_P6yf9Wkcl0uSgR1CPmA0WyrQX9/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbyaEmGbMsyxDG76yWlhxrzggAuWJZtPQSgA6UB3CygkfsTUyuONqL8TYF6aXEwxgvW5/exec", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
@@ -39,6 +40,7 @@ const Contact = () => {
         firstName: "",
         lastName: "",
         email: "",
+        phone: "",
         company: "",
         service: "",
         message: "",
@@ -154,7 +156,19 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="company">Company</Label>
+              <Label htmlFor="phone">Phone *</Label>
+              <Input
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Enter phone number"
+                // disabled={isSubmitting}
+              />
+            </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="company">Company *</Label>
                   <Input id="company" value={formData.company} onChange={handleChange} placeholder="Your Company" />
                 </div>
 

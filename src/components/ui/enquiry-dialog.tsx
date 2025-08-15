@@ -33,8 +33,8 @@ const EnquiryDialog = ({ open, onOpenChange }: EnquiryDialogProps) => {
     firstName: "",
     lastName: "",
     email: "",
-    company: "",
     phone: "",
+    company: "",
     service: "",
     message: "",
   });
@@ -54,7 +54,7 @@ const EnquiryDialog = ({ open, onOpenChange }: EnquiryDialogProps) => {
 
     try {
       await fetch(
-        "https://script.google.com/macros/s/AKfycbxR9lP0a33N8YKTlfp-C4OH71hrMQGomVwZZ0xV0_P6yf9Wkcl0uSgR1CPmA0WyrQX9/exec",
+        "https://script.google.com/macros/s/AKfycbyaEmGbMsyxDG76yWlhxrzggAuWJZtPQSgA6UB3CygkfsTUyuONqL8TYF6aXEwxgvW5/exec",
         {
           method: "POST",
           mode: "no-cors",
@@ -162,7 +162,7 @@ const EnquiryDialog = ({ open, onOpenChange }: EnquiryDialogProps) => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="phone">Phone</Label>
+              <Label htmlFor="phone">Phone *</Label>
               <Input
                 id="phone"
                 name="phone"
