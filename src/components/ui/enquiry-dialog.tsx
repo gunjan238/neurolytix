@@ -10,7 +10,6 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-
 import {
   AlertDialog,
   AlertDialogContent,
@@ -21,6 +20,7 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
+import { useToast } from "@/components/ui/use-toast";
 
 interface EnquiryDialogProps {
   open: boolean;
@@ -28,8 +28,10 @@ interface EnquiryDialogProps {
 }
 
 const EnquiryDialog = ({ open, onOpenChange }: EnquiryDialogProps) => {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     company: "",
     phone: "",
@@ -37,21 +39,7 @@ const EnquiryDialog = ({ open, onOpenChange }: EnquiryDialogProps) => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    onOpenChange(false);
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      phone: "",
-      service: "",
-      message: "",
-    });
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -60,30 +48,92 @@ const EnquiryDialog = ({ open, onOpenChange }: EnquiryDialogProps) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbxR9lP0a33N8YKTlfp-C4OH71hrMQGomVwZZ0xV0_P6yf9Wkcl0uSgR1CPmA0WyrQX9/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        company: "",
+        phone: "",
+        service: "",
+        message: "",
+      });
+
+      // Show toast
+      toast({
+        title: "Enquiry Sent",
+        description: "We have received your message and will get back to you shortly.",
+      });
+
+      setIsSubmitting(false);
+      onOpenChange(false); // Close dialog
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "Error",
+        description: "There was a problem sending your enquiry. Please try again.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-gradient">Get Started with NuroLytix</AlertDialogTitle>
+          <AlertDialogTitle className="text-gradient">
+            Get Started with NuroLytix
+          </AlertDialogTitle>
           <AlertDialogDescription>
             Tell us about your project and we'll get back to you within 24 hours.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Name *</Label>
+              <Label htmlFor="firstName">First Name *</Label>
               <Input
-                id="name"
-                name="name"
-                value={formData.name}
+                id="firstName"
+                name="firstName"
+                value={formData.firstName}
                 onChange={handleInputChange}
                 required
-                placeholder="Your name"
+                placeholder="John"
+                disabled={isSubmitting}
               />
             </div>
+
             <div className="space-y-2">
+              <Label htmlFor="lastName">Last Name *</Label>
+              <Input
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleInputChange}
+                required
+                placeholder="Doe"
+                disabled={isSubmitting}
+              />
+            </div>
+
+            <div className="space-y-2 col-span-2">
               <Label htmlFor="email">Email *</Label>
               <Input
                 id="email"
@@ -93,10 +143,11 @@ const EnquiryDialog = ({ open, onOpenChange }: EnquiryDialogProps) => {
                 onChange={handleInputChange}
                 required
                 placeholder="your@email.com"
+                disabled={isSubmitting}
               />
             </div>
           </div>
-          
+
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="company">Company *</Label>
@@ -105,7 +156,9 @@ const EnquiryDialog = ({ open, onOpenChange }: EnquiryDialogProps) => {
                 name="company"
                 value={formData.company}
                 onChange={handleInputChange}
+                required
                 placeholder="Company name"
+                disabled={isSubmitting}
               />
             </div>
             <div className="space-y-2">
@@ -116,35 +169,37 @@ const EnquiryDialog = ({ open, onOpenChange }: EnquiryDialogProps) => {
                 value={formData.phone}
                 onChange={handleInputChange}
                 placeholder="Enter phone number"
+                disabled={isSubmitting}
               />
             </div>
           </div>
-          
+
           <div className="space-y-2">
-   <div className="space-y-2">
-  <Label htmlFor="service">Service Interest</Label>
-  <Select
-    value={formData.service}
-    onValueChange={(value) =>
-      setFormData((prev) => ({ ...prev, service: value }))
-    }
-  >
-    <SelectTrigger id="service" className="w-full">
-      <SelectValue placeholder="Select a service" />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectItem value="AI/ML">AI/ML</SelectItem>
-      <SelectItem value="BI">BI</SelectItem>
-      <SelectItem value="Software Development">Software Development</SelectItem>
-      <SelectItem value="Data Consultancy">Data Consultancy</SelectItem>
-      <SelectItem value="Other">Other</SelectItem>
-    </SelectContent>
-  </Select>
-</div>
-
-
+            <Label htmlFor="service">Service Interest</Label>
+            <Select
+              value={formData.service}
+              onValueChange={(value) =>
+                setFormData((prev) => ({ ...prev, service: value }))
+              }
+              disabled={isSubmitting}
+            >
+              <SelectTrigger id="service" className="w-full">
+                <SelectValue placeholder="Select a service" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="AI/ML">AI/ML</SelectItem>
+                <SelectItem value="BI">BI</SelectItem>
+                <SelectItem value="Software Development">
+                  Software Development
+                </SelectItem>
+                <SelectItem value="Data Consultancy">
+                  Data Consultancy
+                </SelectItem>
+                <SelectItem value="Other">Other</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="message">Project Details</Label>
             <Textarea
@@ -154,16 +209,21 @@ const EnquiryDialog = ({ open, onOpenChange }: EnquiryDialogProps) => {
               onChange={handleInputChange}
               placeholder="Tell us about your project requirements..."
               rows={3}
+              disabled={isSubmitting}
             />
           </div>
-        </form>
 
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleSubmit}>
-            Send Enquiry
-          </AlertDialogAction>
-        </AlertDialogFooter>
+          <AlertDialogFooter>
+            <AlertDialogCancel type="button" disabled={isSubmitting}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction asChild>
+              <Button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Sending..." : "Send Enquiry"}
+              </Button>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </form>
       </AlertDialogContent>
     </AlertDialog>
   );
