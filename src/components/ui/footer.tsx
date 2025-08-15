@@ -81,10 +81,11 @@ const Footer = () => {
             {/* Social Links */}
             <div className="flex space-x-3">
               <a
-  href="https://www.linkedin.com/in/gunjan-kothari-bd290901/"
+  href="https://www.linkedin.com/company/nurolytix-intelligent-solutions/"
   target="_blank"
   rel="noopener noreferrer"
 >
+  
   <Button variant="outline" size="sm" className="flex items-center gap-2">
     <Linkedin className="w-4 h-4" />
    
