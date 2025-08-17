@@ -82,7 +82,7 @@ const Team = () => {
 
                 <div>
                   <h3 className="text-2xl font-bold mb-2">Om Bhimani</h3>
-                  <p className="text-primary font-semibold mb-4">Co-Founder</p>
+                  <p className="text-primary font-semibold mb-4">Managing Director & CTO</p>
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-2 mb-6">
