@@ -28,6 +28,7 @@ const Team = () => {
             <h2 className="text-3xl font-bold mb-12 text-center">Leadership Team</h2>
 
             {/* Gunjan Kothari Profile - Single Column */}
+            <div className="flex justify-center gap-8 flex-wrap">
             <Card className="card-neural mb-12 w-80 text-center mx-auto">
               <div className="flex flex-col items-center p-8 text-center space-y-6">
                 <div className="aspect-square w-48 rounded-xl overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
@@ -63,6 +64,47 @@ const Team = () => {
   </Button>
 </a>
 
+                
+                </div>
+              </div>
+            </Card>
+
+            {/*Om Bhimani profile*/}
+             <Card className="card-neural mb-12 w-80 text-center mx-auto">
+              <div className="flex flex-col items-center p-8 text-center space-y-6">
+                <div className="aspect-square w-48 rounded-xl overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                  <img
+                    src="assets\Om bhimani.jpg"
+                    alt="Om Bhimani- Co-Founder"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-bold mb-2">Om Bhimani</h3>
+                  <p className="text-primary font-semibold mb-4">Co-Founder</p>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-2 mb-6">
+                  <Badge variant="outline" className="bg-primary/10">Azure Data Engineer</Badge>
+                  <Badge variant="outline" className="bg-primary/10">Delta Lake & Databricks</Badge>
+                  <Badge variant="outline" className="bg-primary/10">Data Analyst</Badge>
+                  {/* <Badge variant="outline" className="bg-primary/10"></Badge> */}
+                </div>
+
+                <div className="flex gap-4">
+                  
+                  <a
+  href="https://www.linkedin.com/in/ombhimani/"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Button variant="outline" size="sm" className="flex items-center gap-2">
+    <Linkedin className="w-4 h-4" />
+    
+  </Button>
+</a>
+
                   {/* <Button variant="outline" size="sm" className="flex items-center gap-2">
                     <Mail className="w-4 h-4" />
                     
@@ -70,8 +112,12 @@ const Team = () => {
                 </div>
               </div>
             </Card>
+            </div>
           </div>
         </div>
+
+
+        
       </section>
 
       {/* Company Values in Action */}
